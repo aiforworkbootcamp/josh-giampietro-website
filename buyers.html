@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buyers | Josh Giampietro | Cape Cod, Massachusetts Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F7F4EE; --bg-raised: #EFEAE0; --bg-card: #E7E1D3;
+    --white: #1A1A1A; --off-white: #33302A;
+    --gold: #2E5A6B; --gold-dim: #21414D;
+    --gray: #6B655C; --gray-dim: #8A8378; --line: #D9D2C3; --red: #A8332B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--off-white); font-family:'Jost', sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:1400px; margin:0 auto; padding:0 40px;}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond', serif; font-weight:500;}
+
+  header.site-header{background:var(--bg); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:100;}
+  .navbar{max-width:1400px; margin:0 auto; padding:18px 40px; display:flex; align-items:center; justify-content:space-between;}
+  .logo-badge{width:64px; height:64px; border:1.5px solid var(--white); background:var(--white); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .logo-badge svg{width:34px; height:34px;}
+  .navlinks{display:flex; gap:28px; flex-wrap:wrap; justify-content:flex-end;}
+  .navlinks a{font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--off-white); font-weight:400; transition:color .15s; white-space:nowrap;}
+  .navlinks a:hover{color:var(--gold);}
+  .navlinks a.current{color:var(--gold);}
+  @media(max-width:1100px){ .navlinks{display:none;} }
+
+  .social-rail{position:fixed; right:24px; top:50%; transform:translateY(-50%); z-index:90; display:flex; flex-direction:column; gap:10px;}
+  .social-rail a{width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:14px; color:var(--white); transition:background .15s, border-color .15s;}
+  .social-rail a:hover{background:var(--gold); border-color:var(--gold);}
+  @media(max-width:760px){ .social-rail{display:none;} }
+
+  .page-hero{position:relative; height:300px; display:flex; align-items:flex-end; overflow:hidden; background-size:cover; background-position:center;}
+  .page-hero::after{content:""; position:absolute; inset:0; background:rgba(10,10,10,.55);}
+  .page-hero-inner{position:relative; z-index:2; padding:0 40px 34px; max-width:1400px; margin:0 auto; width:100%;}
+  .page-hero h1{font-size:3rem; color:var(--white); text-transform:uppercase; letter-spacing:.02em;}
+  .breadcrumb{padding:22px 40px; max-width:1400px; margin:0 auto; font-size:13px; color:var(--off-white);}
+  .breadcrumb a{color:var(--gold);}
+
+  /* ---------- STEP NAV ---------- */
+  .step-nav{display:grid; grid-template-columns:repeat(6,1fr); gap:0; margin-bottom:50px;}
+  .step-item{border:1px solid var(--line); padding:30px 16px; text-align:center; cursor:pointer; color:var(--gray); transition:border-color .15s, color .15s;}
+  .step-item:hover{color:var(--off-white);}
+  .step-item.active{border-color:var(--white); color:var(--white);}
+  .step-icon{width:40px; height:40px; margin:0 auto 14px; stroke:currentColor; fill:none; stroke-width:1.4;}
+  .step-item span{font-size:12px; letter-spacing:.06em; text-transform:uppercase;}
+  @media(max-width:900px){ .step-nav{grid-template-columns:repeat(3,1fr);} }
+  @media(max-width:560px){ .step-nav{grid-template-columns:repeat(2,1fr);} }
+
+  .step-panel{display:none; padding-bottom:60px;}
+  .step-panel.active{display:block;}
+  .step-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  @media(max-width:900px){ .step-grid{grid-template-columns:1fr;} }
+  .step-text h2{font-size:2.4rem; color:var(--gold); text-transform:uppercase; margin-bottom:20px;}
+  .step-text h4{font-size:1.05rem; color:var(--white); font-weight:600; font-family:'Jost',sans-serif; margin:22px 0 8px;}
+  .step-text p, .step-text li{color:var(--off-white); font-size:14.5px; margin-bottom:6px;}
+  .step-text p{margin-bottom:16px;}
+  .step-text ul, .step-text ol{padding-left:20px; margin-bottom:16px;}
+  .step-text ul li, .step-text ol li{margin-bottom:8px;}
+  .step-photo{position:relative; border-radius:2px; overflow:hidden; min-height:260px;}
+  .step-photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .step-prevnext{display:flex; justify-content:center; gap:40px; margin-top:20px; font-family:'Cormorant Garamond',serif; font-size:1.3rem;}
+  .step-prevnext span{color:var(--gold); cursor:pointer;}
+  .step-prevnext span.disabled{color:var(--gray-dim); cursor:default;}
+
+  .contact-section{position:relative; background-size:cover; background-position:center; padding:100px 0;}
+  .contact-section::before{content:""; position:absolute; inset:0; background:rgba(8,10,14,.68);}
+  .contact-grid{position:relative; z-index:2; display:grid; grid-template-columns:.9fr 1.1fr; gap:60px; align-items:center;}
+  @media(max-width:860px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-grid h2{font-size:3.4rem; font-style:italic; color:var(--white); line-height:1.15;}
+  .contact-form{display:flex; flex-direction:column; gap:22px;}
+  .contact-form label{font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--off-white); display:block; margin-bottom:8px;}
+  .contact-form .field{border-bottom:1px solid rgba(255,255,255,.35); padding-bottom:10px;}
+  .contact-form input, .contact-form textarea{background:transparent; border:none; outline:none; width:100%; color:var(--white); font-family:'Jost',sans-serif; font-size:14px; padding:4px 0;}
+  .contact-form textarea{resize:vertical; min-height:70px;}
+  .contact-form input::placeholder, .contact-form textarea::placeholder{color:var(--gray-dim);}
+  .contact-submit{display:flex; align-items:center; gap:12px; background:none; border:none; cursor:pointer; font-family:'Jost',sans-serif; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--white); margin-top:8px;}
+
+  footer{background:var(--bg); border-top:1px solid var(--line); padding-top:56px;}
+  .footer-brand{display:flex; flex-direction:column; align-items:center; gap:22px; text-align:center; padding-bottom:38px;}
+  .footer-social{display:flex; gap:16px;}
+  .footer-social a{width:34px; height:34px; border-radius:50%; border:1px solid var(--gold-dim); color:var(--gold); display:flex; align-items:center; justify-content:center; font-size:13px;}
+  .footer-cols{display:grid; grid-template-columns:1fr 1fr; gap:40px; max-width:640px; margin:0 auto; text-align:center; padding-bottom:44px; border-bottom:1px solid var(--line);}
+  .footer-cols h4{font-size:1.15rem; color:var(--white); margin-bottom:8px; text-transform:none; font-weight:500;}
+  .footer-cols p{font-size:13px; color:var(--gray);}
+  .footer-nav{display:flex; flex-wrap:wrap; justify-content:center; gap:26px; padding:32px 0; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gray);}
+  .footer-nav a:hover{color:var(--gold);}
+  .compliance{max-width:1000px; margin:0 auto; padding:0 40px 30px; font-size:11px; color:var(--gray-dim); line-height:1.7; text-align:center;}
+  .mls-disclosure{max-width:1000px; margin:0 auto; padding:24px 40px; border-top:1px solid var(--line); font-size:10.5px; color:var(--gray-dim); line-height:1.7;}
+  .mls-disclosure strong{color:var(--gray);}
+  .copyright{text-align:center; font-size:11px; color:var(--gray-dim); padding:20px 0 34px;}
+  .flag-note{background:rgba(185,148,92,.08); border:1px dashed var(--gold-dim); color:var(--gold); font-size:11.5px; letter-spacing:.02em; padding:10px 16px; margin-top:10px;}
+
+  /* ---- LIGHT THEME: text/icons that sit over photos or fixed-color chips must stay light regardless of theme ---- */
+  .hero-content h1, .page-hero h1, .scroll-cue,
+  .comm-card-body h3, .comm-card .comm-desc, .comm-card .explore,
+  .blog-card-body h4, .blog-card-body p, .blog-card .read-more,
+  .contact-section h2, .contact-form label,
+  .contact-form input, .contact-form textarea,
+  .status-tag, .sold-tag, .fav-heart{
+    color:#F7F4EE !important;
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder{
+    color:#B7AFA0 !important;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="navbar">
+    <a href="index.html" class="logo-badge"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="70" font-family="Cormorant Garamond, serif" font-size="62" text-anchor="middle" fill="#FFFFFF">JG</text></svg></a>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="meet-josh.html">Meet Josh</a>
+      <a href="listings.html">Listings</a>
+      <a href="sold.html">Sold</a>
+      <a href="communities.html">Communities</a>
+      <a href="buyers.html" class="current">Buyers</a>
+      <a href="sellers.html">Sellers</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="social-rail">
+  <a href="tel:5086806841" aria-label="Phone">&#9742;</a>
+  <a href="mailto:joshgiampietro@gmail.com" aria-label="Email">&#9993;</a>
+  <a href="#" aria-label="Location">&#128205;</a>
+  <a href="#social-unconfirmed" aria-label="X">&#120143;</a>
+  <a href="#social-unconfirmed" aria-label="LinkedIn">in</a>
+  <a href="#social-unconfirmed" aria-label="Facebook">f</a>
+  <a href="#social-unconfirmed" aria-label="Instagram">&#9678;</a>
+</div>
+
+<section class="page-hero" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600');">
+  <div class="page-hero-inner"><h1>Buyers</h1></div>
+</section>
+<div class="breadcrumb"><a href="index.html">Home</a> &raquo; Buyers</div>
+
+<div style="background:rgba(185,148,92,.08); border-top:1px solid var(--gold-dim); border-bottom:1px solid var(--gold-dim); padding:18px 40px; text-align:center; color:var(--gold); font-size:13px; letter-spacing:.02em;">This is a generic step-by-step guide and should be reviewed and personalized by Josh Giampietro before publishing.</div>
+
+<section class="wrap" style="padding-bottom:90px;">
+  <div class="step-nav">
+    <div class="step-item active" data-step="0">
+      <svg class="step-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5"/><circle cx="12" cy="16.5" r=".4" fill="currentColor" stroke="none"/></svg>
+      <span>Deciding to Buy</span>
+    </div>
+    <div class="step-item" data-step="1">
+      <svg class="step-icon" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="M15 15l5 5"/><path d="M10 7v3l2 1.5"/></svg>
+      <span>Preparing to Buy</span>
+    </div>
+    <div class="step-item" data-step="2">
+      <svg class="step-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="8.5" cy="9.5" r="1.7"/><path d="M5.5 15c.5-2 2-3 3-3s2.5 1 3 3"/><path d="M14 8h5M14 12h5M14 16h3"/></svg>
+      <span>Choose a Real<br>Estate Agent</span>
+    </div>
+    <div class="step-item" data-step="3">
+      <svg class="step-icon" viewBox="0 0 24 24"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/></svg>
+      <span>Time to Go<br>Shopping</span>
+    </div>
+    <div class="step-item" data-step="4">
+      <svg class="step-icon" viewBox="0 0 24 24"><circle cx="8" cy="9" r="4"/><circle cx="15" cy="8" r="3"/><circle cx="10" cy="16" r="2.5"/></svg>
+      <span>Escrow Inspections<br>&amp; Appraisals</span>
+    </div>
+    <div class="step-item" data-step="5">
+      <svg class="step-icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.5-8.6C.8 8.6 2.3 5 6 5c2 0 3.3 1.1 4 2.2C10.7 6.1 12 5 14 5c3.7 0 5.2 3.6 3.5 7.4C15 16.6 12 21 12 21z"/></svg>
+      <span>Moving In</span>
+    </div>
+  </div>
+
+  <!-- STEP 0: Deciding to Buy -->
+  <div class="step-panel active" data-panel="0">
+    <div class="step-grid">
+      <div class="step-text">
+        <h2>Deciding to Buy</h2>
+        <p>Purchasing a property is most likely the biggest financial decision you will ever make. Whether this is your first purchase or you are an experienced buyer, this decision must be made carefully.</p>
+        <h4>Why Do You Want To Buy?</h4>
+        <p>Are you tired of paying rent? Have you decided to pay your own mortgage and not your landlord's? Have you outgrown your current home? Are you looking for an investment portfolio? Are you looking for a rental property? Would you like a larger yard? Would you rather live in a different area? Do you want to shorten your commute? Having a clear sense of your reasons for buying will help you choose the right property.</p>
+        <h4>Has Your Income Grown?</h4>
+        <p>Property ownership is an excellent investment; whether you are looking for your dream home, a rental property, or to expand your investment portfolio. Owning real estate is one of the least risky ways to build equity or to obtain a greater return on your initial investment.</p>
+      </div>
+      <div class="step-photo"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1000" alt="Couple considering buying a home"></div>
+    </div>
+    <div class="step-prevnext"><span class="disabled">&#8592; PREV</span><span onclick="stepGo(1)">NEXT &#8594;</span></div>
+  </div>
+
+  <!-- STEP 1: Preparing to Buy -->
+  <div class="step-panel" data-panel="1">
+    <div class="step-grid">
+      <div class="step-text">
+        <h2>Preparing to Buy</h2>
+        <p>Before you start shopping for your property, it is a good idea to make some preparations.</p>
+        <h4>Build Your Green File.</h4>
+        <p>A green file contains all your important financial documents. You will need it to secure financing for your property. The typical green file should contain:</p>
+        <ul>
+          <li>Financial statements</li>
+          <li>Bank accounts</li>
+          <li>Investments</li>
+          <li>Credit cards</li>
+          <li>Auto loans</li>
+          <li>Recent pay stubs</li>
+          <li>Tax returns for two years</li>
+          <li>Copies of leases for investment properties</li>
+          <li>401K statements, life insurance, stocks, bonds, and mutual account information.</li>
+        </ul>
+        <h4>Check Your Credit Rating.</h4>
+        <p>Your credit score will have a huge impact on what type of property you can buy, and at what price. It is first recommended to check your credit rating with an experienced lending institution so that we can determine what you can afford. The lender will research your credit ratings from the three credit reporting agencies Equifax, Experian and Trans Union. We will be happy to recommend experienced, knowledgeable lenders in the residential, construction, and commercial and investment real estate fields.</p>
+        <h4>Be Careful With Your Finances.</h4>
+        <p>Now is not a good time to make sudden career changes or large purchases. You want to approach your property purchase from a position of financial stability.</p>
+      </div>
+      <div class="step-photo"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1000" alt="Reviewing financial documents"></div>
+    </div>
+    <div class="step-prevnext"><span onclick="stepGo(0)">&#8592; PREV</span><span onclick="stepGo(2)">NEXT &#8594;</span></div>
+  </div>
+
+  <!-- STEP 2: Choose a Real Estate Agent -->
+  <div class="step-panel" data-panel="2">
+    <div class="step-grid">
+      <div class="step-text">
+        <h2>Choose a Real Estate Agent</h2>
+        <p>Buying a property requires making many important financial decisions, understanding complex issues and completing a lot of paperwork. It helps to have an expert in your corner when undertaking such a large purchase. We can guide you through this process, and also provide you with access to property listings before they hit the general market.</p>
+        <h4>Here are some factors to consider when choosing your real estate professional:</h4>
+        <ul>
+          <li>Look for a full-time agent &ndash; one who has experience completing transactions similar to yours.</li>
+          <li>Interview a few agents: Are they familiar with the area in which you are interested?</li>
+          <li>Ask how much time the agent will have for you, and if they are available at night and on weekends.</li>
+          <li>Ask about their credentials and education: A good agent will continually strive to improve and gain knowledge of the latest real estate trends and hold the highest designations in their respective fields of expertise.</li>
+          <li>Does the agent return your calls promptly? Time is money when attempting to buy a property.</li>
+          <li>Ask for a list of properties they have sold or a list of references.</li>
+          <li>Choose an agent who listens attentively to your needs and concerns. Pick an agent, with whom you feel comfortable.</li>
+        </ul>
+      </div>
+      <div class="step-photo"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1000" alt="Meeting with a real estate agent"></div>
+    </div>
+    <div class="step-prevnext"><span onclick="stepGo(1)">&#8592; PREV</span><span onclick="stepGo(3)">NEXT &#8594;</span></div>
+  </div>
+
+  <!-- STEP 3: Time to Go Shopping -->
+  <div class="step-panel" data-panel="3">
+    <div class="step-grid">
+      <div class="step-text">
+        <h2>Time to Go Shopping</h2>
+        <p>Once those preparations are out of the way, it is time to find the right property for you.</p>
+        <h4>Take a Drive.</h4>
+        <p>Get to know the neighborhoods, complexes, or subdivisions, which interest you. Drive around and get a feel for what it would be like to own a property in the area. Start getting a sense of the properties available in those areas.</p>
+        <h4>Narrow Your Search.</h4>
+        <p>Select a few properties that interest you the most and have your real estate agent make appointments to visit them. Ask your real estate agent about the potential long term resale value of the properties you are considering.</p>
+        <h4>Time to Buy.</h4>
+        <p>Once you have picked out the property you want to purchase, your real estate agent can help you make an offer that the seller will accept. A good agent will investigate the potential costs and expenses associated with the new property. An agent can also help you draft your offer in a way that gives you the advantage over another offer.</p>
+      </div>
+      <div class="step-photo"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000" alt="Touring a home"></div>
+    </div>
+    <div class="step-prevnext"><span onclick="stepGo(2)">&#8592; PREV</span><span onclick="stepGo(4)">NEXT &#8594;</span></div>
+  </div>
+
+  <!-- STEP 4: Escrow Inspections & Appraisals -->
+  <div class="step-panel" data-panel="4">
+    <div class="step-grid">
+      <div class="step-text">
+        <h2>Escrow Inspections &amp; Appraisals</h2>
+        <h4 style="margin-top:0;">The Process, Step-by-Step</h4>
+        <h4>The Initial Agreement and Deposit.</h4>
+        <p>An effective agreement is a legal arrangement between a potential purchaser and the property's seller.</p>
+        <p>Some important tips to keep in mind to streamline the process:</p>
+        <ul>
+          <li>Keep written records of everything. For the sake of clarity, it will be extremely useful to transcribe all verbal agreements including counter-offers and addendums and to convert them into written agreements to be signed by both parties. We will assist you in drafting all the paperwork for your purchase and make sure that you have copies of everything.</li>
+          <li>Stick to the schedule. Now that you have chosen your offer, you and the seller will be given a timeline to mark every stage in the process of closing the real estate contract. Meeting the requirements on time ensures a smoother flow of negotiations so that each party involved is not in breach of their agreements. During the process we will keep you constantly updated, so you will always be prepared for the next step.</li>
+        </ul>
+        <h4>The Closing Agent.</h4>
+        <p>Either a title company or an attorney will be selected as a closing agent. The closing agent will hold the deposit in escrow and will research the complete recorded history of the property to ensure that the title is free and clear of encumbrances by the date of closing and that all new encumbrances are properly added to the title. Some properties are subject to restrictions which limit various activities such as building or parking restrictions. There may be recorded easements and encroachments, which limit the rights to use your property.</p>
+        <h4>The Closing Agent.</h4>
+        <p>You may wish to consult an attorney or tax advisor on the best way to hold title. Different methods of holding title have different legal, estate and tax implications, especially when selling or upon death of the title holder.</p>
+        <h4>Inspections</h4>
+        <p>&hellip; as agreed upon in the effective contract to purchase. You are entitled to have different inspectors inspect the property, if you wish to obtain professional opinions from inspectors who specialize in a specific area (eg. roof, HVAC, structure). If you are purchasing a commercial property, then you will need to have an environmental audit done on the site for the lending institution. We can recommend several different inspectors.</p>
+        <p>Depending on the outcome of these inspections, one of two things may happen:</p>
+        <ol>
+          <li>Either each milestone is successfully closed and the contingencies will be removed, bringing you one step closer to the close, or</li>
+          <li>The buyer, after reviewing the property and the papers, requests a renegotiation of the terms of contract (usually the price).</li>
+        </ol>
+        <h4>Appraisal and Lending.</h4>
+        <p>It is imperative that you keep in close communication with your lender, who will let you know when additional documents are needed to approve your loan application and fund your loan. If the agreement is conditional upon financing, then the property will be appraised by a licensed appraiser to determine the value for the lending institution, via a third party. This is done so that the lending institution can confirm their investment in your property is accurate. Appraisers are specialists in determining the value of properties, based on a combination of square footage measurements, building costs, recent sales of comparable properties, operating income, etc. When you are within two weeks of closing, double check with your lender to be sure the loan will go through smoothly and on time.</p>
+        <h4>Association Approval.</h4>
+        <p>If the property that you are purchasing is conditional upon an association approval, request the rules, regulations, and other important documents from the seller as soon as you have an effective agreement to purchase. Make sure that the application documents and processing fees are submitted to the appropriate person at the association by the required time. Fill out all of the information completely and legibly so there is no delay in processing the application. If you are required to meet with the association for your approval, make an appointment as soon as possible for the interview. Most associations require a certificate of approval before move-in. Your closing agent will request that the original copy of this approval letter be brought to the closing, so that it can be recorded with the deed in the county public records.</p>
+        <h4>Property Insurance.</h4>
+        <p>If you are obtaining a loan, you will be required by your lender to purchase a certain amount of insurance on the property. The value will depend on the lending institution and the purchase price of the property. You may be able to save hundreds of dollars a year on homeowners insurance by shopping around for insurance. You can also save money with these tips.</p>
+        <ul>
+          <li>Consider a higher deductible. Increasing your deductible by just a few hundred dollars can make a big difference in your premium.</li>
+          <li>Ask your insurance agent about discounts. You may be able get a lower premium if your home has safety features such as dead-bolt locks, smoke detectors, an alarm system, storm shutters or fire-retardant roofing materials. Persons over 55 years of age or long-term customers may also be offered discounts.</li>
+          <li>Insure your house NOT the land under it. After a disaster, the land is still there. If you do not subtract the value of the land when deciding how much homeowner's insurance to buy, you will pay more than you should.</li>
+        </ul>
+        <p>We will be happy to recommend experienced knowledgeable insurance agents for every property type.</p>
+      </div>
+      <div class="step-photo" style="min-height:1900px;"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000" alt="Reviewing inspection paperwork"></div>
+    </div>
+    <div class="step-prevnext"><span onclick="stepGo(3)">&#8592; PREV</span><span onclick="stepGo(5)">NEXT &#8594;</span></div>
+  </div>
+
+  <!-- STEP 5: Moving In -->
+  <div class="step-panel" data-panel="5">
+    <div class="step-grid">
+      <div class="step-text">
+        <h2>Moving In</h2>
+        <h4 style="margin-top:0;">Closing Day</h4>
+        <p>If you have come this far, then this means that it is almost time for a congratulations, but not yet. Do not forget to tie up these loose ends:</p>
+        <h4>Final Walk-Through Inspection.</h4>
+        <p>More of a formality than anything else, the final inspection takes place a day before, or the day of the closing. You will visit the property to verify that all is in working order, everything is the same as when you last viewed the property, that there are no extra items left behind, and that everything included in your purchase is still at the property.</p>
+        <h4>Home Services and Utilities.</h4>
+        <p>We will provide a list of useful numbers for the activation of home services and utilities after the closing occurs.</p>
+        <h4>Be Prepared.</h4>
+        <p>We are ready to assist you should an unforeseen glitch pop up, even at this last stage. Something at the property breaks down, or some other minor detail &ndash; no need to worry. We have encountered these problems before so we know how to handle them efficiently and in a stress-free manor.</p>
+        <h4>Closing.</h4>
+        <p>The closing agent will furnish all parties involved with a settlement statement, which summarizes and details the financial transactions enacted in the process. You and the seller(s) will sign this statement, as well as the closing agent, certifying its accuracy. If you are obtaining financing, you will have to sign all pertinent documentation required by the lending institution. If you are unable to attend the scheduled closing, arrangements can be made depending on the circumstances and the notice that we receive. If you are bringing funds to the transaction, you can elect to either have the funds wired electronically into the closing agent's escrow account, or bring a certified bank check to the closing in the amount specified on the settlement statement. The seller should arrange to have all property keys and any other important information for you at the closing so that you may receive these items at this time.</p>
+      </div>
+      <div class="step-photo"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1000" alt="Family moving into a new home"></div>
+    </div>
+    <div class="step-prevnext"><span onclick="stepGo(4)">&#8592; PREV</span><span class="disabled">NEXT &#8594;</span></div>
+  </div>
+
+  <div class="flag-note">NOTE — the live site repeats a "The Closing Agent." subheading twice in this step (once for title/encumbrances, once for how to hold title). Reproduced as-is for fidelity; likely a content labeling issue on the source site worth flagging if this becomes a real deliverable.</div>
+</section>
+
+<section class="contact-section" style="background-image:url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1600&sat=-20');">
+  <div class="wrap contact-grid">
+    <h2>Get In<br>Touch</h2>
+    <form class="contact-form" onsubmit="return sendMailto(this);">
+      <div class="field"><label>Name</label><input type="text" name="name" required></div>
+      <div class="field"><label>Phone</label><input type="tel" name="phone"></div>
+      <div class="field"><label>Email Address</label><input type="email" name="email" required></div>
+      <div class="field"><label>Message</label><textarea name="message" rows="3"></textarea></div>
+      <button class="contact-submit" type="submit">&#10148; Submit</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="logo-badge" style="width:56px; height:56px;"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="68" font-family="Cormorant Garamond, serif" font-size="56" text-anchor="middle" fill="#FFFFFF">JG</text></svg></div>
+    <div style="font-family:'Jost',sans-serif; font-size:1.8rem; font-weight:600; letter-spacing:.02em; color:var(--white);">GREER REAL ESTATE</div>
+    <div class="footer-social">
+      <a href="mailto:joshgiampietro@gmail.com">&#9993;</a>
+      <a href="tel:5086806841">&#9742;</a>
+      <a href="#social-unconfirmed">f</a>
+      <a href="#social-unconfirmed">&#120143;</a>
+      <a href="#social-unconfirmed">&#9678;</a>
+      <a href="#social-unconfirmed">in</a>
+    </div>
+  </div>
+  <div class="footer-cols">
+    <div><h4>Location</h4><p>3264 Main St, Barnstable, MA 02630</p></div>
+    <div><h4>Contact</h4><p>Phone: (508) 680-6841<br>Email: joshgiampietro@gmail.com</p></div>
+  </div>
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="meet-josh.html">Meet Josh</a>
+    <a href="listings.html">Listings</a>
+    <a href="sold.html">Sold</a>
+    <a href="communities.html">Communities</a>
+    <a href="buyers.html">Buyers</a>
+    <a href="sellers.html">Sellers</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="compliance">
+    Josh Giampietro is a real estate agent affiliated with Greer Real Estate, LLC. Greer Real Estate, LLC is a licensed real estate broker and abides by equal housing opportunity laws. All materials presented herein are intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. No statement is made as to the accuracy of any description. All measurements and square footage are approximate. This is not intended to solicit property already listed. Nothing herein shall be construed as legal, accounting, or other professional advice outside the realm of real estate brokerage.
+    <div style="margin-top:14px; font-size:16px; letter-spacing:.06em; color:var(--gray);">&#8962; &nbsp; &#9632; REALTOR &nbsp; MLS</div>
+  </div>
+  <div class="mls-disclosure">
+    <strong>Cape Cod &amp; Islands Multiple Listing Service (CCIMLS) / Cape Cod &amp; Islands Association of REALTORS&reg; (CCIAOR)</strong><br>
+    <div class="flag-note">PLACEHOLDER &mdash; the exact regional MLS/board disclosure boilerplate for CCIMLS/CCIAOR (Josh's listings also appear to be fed through MLS PIN) could not be confirmed from public sources reviewed. Insert the official disclosure language from the applicable entity here before this site goes live.</div>
+    <div class="flag-note">PLACEHOLDER — this mockup is a static recreation for pitch review. It is not a live site.</div>
+  </div>
+  <div class="copyright">Mockup for internal pitch review — not a live site.</div>
+</footer>
+
+<script>
+(function(){
+  const items = document.querySelectorAll('.step-item');
+  const panels = document.querySelectorAll('.step-panel');
+  window.stepGo = function(idx){
+    items.forEach(i => i.classList.toggle('active', +i.dataset.step === idx));
+    panels.forEach(p => p.classList.toggle('active', +p.dataset.panel === idx));
+    window.scrollTo({top: document.querySelector('.step-nav').offsetTop - 100, behavior:'smooth'});
+  };
+  items.forEach(i => i.addEventListener('click', () => stepGo(+i.dataset.step)));
+})();
+</script>
+
+
+<script>
+function sendMailto(form){
+  var data = new FormData(form);
+  var name = data.get('name') || (((data.get('firstName')||'') + ' ' + (data.get('lastName')||'')).trim());
+  var phone = data.get('phone') || '';
+  var email = data.get('email') || '';
+  var message = data.get('message') || '';
+  var subject = encodeURIComponent('Website Inquiry from ' + (name || 'Website Visitor'));
+  var bodyLines = ['Name: ' + name, 'Phone: ' + phone, 'Email: ' + email, '', 'Message:', message];
+  var body = encodeURIComponent(bodyLines.join('\n'));
+  window.location.href = 'mailto:joshgiampietro@gmail.com?subject=' + subject + '&body=' + body;
+  return false;
+}
+</script>
+</body>
+</html>

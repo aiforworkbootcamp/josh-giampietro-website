@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Josh Giampietro | Cape Cod, Massachusetts Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F7F4EE; --bg-raised: #EFEAE0; --bg-card: #E7E1D3;
+    --white: #1A1A1A; --off-white: #33302A;
+    --gold: #2E5A6B; --gold-dim: #21414D;
+    --gray: #6B655C; --gray-dim: #8A8378; --line: #D9D2C3; --red: #A8332B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--off-white);
+    font-family:'Jost', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:1400px; margin:0 auto; padding:0 40px;}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond', serif; font-weight:500;}
+
+  header.site-header{
+    background:var(--bg); border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:100;
+  }
+  .navbar{
+    max-width:1400px; margin:0 auto; padding:18px 40px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo-badge{
+    width:64px; height:64px; border:1.5px solid var(--white); background:var(--white);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .logo-badge svg{width:34px; height:34px;}
+  .navlinks{display:flex; gap:28px; flex-wrap:wrap; justify-content:flex-end;}
+  .navlinks a{
+    font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--off-white);
+    font-weight:400; transition:color .15s; white-space:nowrap;
+  }
+  .navlinks a:hover{color:var(--gold);}
+  .navlinks a.current{color:var(--gold);}
+  @media(max-width:1100px){ .navlinks{display:none;} }
+
+  .social-rail{
+    position:fixed; right:24px; top:50%; transform:translateY(-50%); z-index:90;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .social-rail a{
+    width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,.55);
+    border:1px solid rgba(255,255,255,.18);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; color:var(--white); transition:background .15s, border-color .15s;
+  }
+  .social-rail a:hover{background:var(--gold); border-color:var(--gold);}
+  @media(max-width:760px){ .social-rail{display:none;} }
+
+  /* ---------- PAGE HERO ---------- */
+  .page-hero{
+    position:relative; height:300px; display:flex; align-items:flex-end; overflow:hidden;
+    background-size:cover; background-position:center;
+  }
+  .page-hero::after{content:""; position:absolute; inset:0; background:rgba(10,10,10,.55);}
+  .page-hero-inner{position:relative; z-index:2; padding:0 40px 34px; max-width:1400px; margin:0 auto; width:100%;}
+  .page-hero h1{font-size:3rem; color:var(--white); text-transform:uppercase; letter-spacing:.02em;}
+  .breadcrumb{padding:22px 40px; max-width:1400px; margin:0 auto; font-size:13px; color:var(--off-white);}
+  .breadcrumb a{color:var(--gold);}
+
+  /* ---------- CONTACT PAGE BODY ---------- */
+  .contact-page-section{padding:70px 0 100px;}
+  .contact-page-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:60px;}
+  @media(max-width:860px){ .contact-page-grid{grid-template-columns:1fr;} }
+  .contact-page-grid h2{font-size:3.2rem; color:var(--white); margin-bottom:18px;}
+  .contact-page-grid > div:first-child p{color:var(--gray); max-width:420px;}
+  .contact-form{display:flex; flex-direction:column; gap:22px;}
+  .contact-form-row{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  @media(max-width:600px){ .contact-form-row{grid-template-columns:1fr;} }
+  .contact-form label{font-size:13px; letter-spacing:.02em; color:var(--off-white); display:block; margin-bottom:10px;}
+  .contact-form .field{border-bottom:1px solid var(--line); padding-bottom:10px;}
+  .contact-form input, .contact-form textarea{background:transparent; border:none; outline:none; width:100%; color:var(--white); font-family:'Jost',sans-serif; font-size:14px; padding:4px 0;}
+  .contact-form textarea{resize:vertical; min-height:70px;}
+  .contact-form input::placeholder, .contact-form textarea::placeholder{color:var(--gray-dim);}
+  .contact-submit{
+    background:var(--gold); color:var(--bg); border:none; cursor:pointer;
+    font-family:'Jost',sans-serif; font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    padding:16px 46px; margin-top:8px; width:fit-content;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--bg); border-top:1px solid var(--line); padding-top:56px;}
+  .footer-brand{display:flex; flex-direction:column; align-items:center; gap:22px; text-align:center; padding-bottom:38px;}
+  .footer-social{display:flex; gap:16px;}
+  .footer-social a{
+    width:34px; height:34px; border-radius:50%; border:1px solid var(--gold-dim); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+  .footer-cols{
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; max-width:640px; margin:0 auto;
+    text-align:center; padding-bottom:44px; border-bottom:1px solid var(--line);
+  }
+  .footer-cols h4{font-size:1.15rem; color:var(--white); margin-bottom:8px; text-transform:none; font-weight:500;}
+  .footer-cols p{font-size:13px; color:var(--gray);}
+  .footer-nav{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:26px; padding:32px 0;
+    font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gray);
+  }
+  .footer-nav a:hover{color:var(--gold);}
+  .compliance{
+    max-width:1000px; margin:0 auto; padding:0 40px 30px; font-size:11px; color:var(--gray-dim);
+    line-height:1.7; text-align:center;
+  }
+  .mls-disclosure{
+    max-width:1000px; margin:0 auto; padding:24px 40px; border-top:1px solid var(--line);
+    font-size:10.5px; color:var(--gray-dim); line-height:1.7;
+  }
+  .mls-disclosure strong{color:var(--gray);}
+  .copyright{text-align:center; font-size:11px; color:var(--gray-dim); padding:20px 0 34px;}
+  .flag-note{
+    background:rgba(185,148,92,.08); border:1px dashed var(--gold-dim); color:var(--gold);
+    font-size:11.5px; letter-spacing:.02em; padding:10px 16px; margin-top:10px;
+  }
+
+  /* ---- LIGHT THEME: text/icons that sit over photos or fixed-color chips must stay light regardless of theme ---- */
+  .hero-content h1, .page-hero h1, .scroll-cue,
+  .comm-card-body h3, .comm-card .comm-desc, .comm-card .explore,
+  .blog-card-body h4, .blog-card-body p, .blog-card .read-more,
+  .contact-section h2, .contact-form label,
+  .contact-form input, .contact-form textarea,
+  .status-tag, .sold-tag, .fav-heart{
+    color:#F7F4EE !important;
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder{
+    color:#B7AFA0 !important;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="navbar">
+    <a href="index.html" class="logo-badge">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <text x="50" y="70" font-family="Cormorant Garamond, serif" font-size="62" text-anchor="middle" fill="#FFFFFF">JG</text>
+      </svg>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="meet-josh.html">Meet Josh</a>
+      <a href="listings.html">Listings</a>
+      <a href="sold.html">Sold</a>
+      <a href="communities.html">Communities</a>
+      <a href="buyers.html">Buyers</a>
+      <a href="sellers.html">Sellers</a>
+      <a href="contact.html" class="current">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="social-rail">
+  <a href="tel:5086806841" aria-label="Phone">&#9742;</a>
+  <a href="mailto:joshgiampietro@gmail.com" aria-label="Email">&#9993;</a>
+  <a href="#" aria-label="Location">&#128205;</a>
+  <a href="#social-unconfirmed" aria-label="X">&#120143;</a>
+  <a href="#social-unconfirmed" aria-label="LinkedIn">in</a>
+  <a href="#social-unconfirmed" aria-label="Facebook">f</a>
+  <a href="#social-unconfirmed" aria-label="Instagram">&#9678;</a>
+</div>
+
+<section class="page-hero" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1600');">
+  <div class="page-hero-inner"><h1>Contact</h1></div>
+</section>
+<div class="breadcrumb"><a href="index.html">Home</a> &raquo; Contact</div>
+
+<section class="contact-page-section">
+  <div class="wrap contact-page-grid">
+    <div>
+      <h2>Got Questions?</h2>
+      <p>Our team has answers! Just send us a message and one our agents will be in touch with you shortly.</p>
+    </div>
+    <form class="contact-form" onsubmit="return sendMailto(this);">
+      <div class="contact-form-row">
+        <div class="field"><label>First Name *</label><input type="text" name="firstName" required></div>
+        <div class="field"><label>Last Name *</label><input type="text" name="lastName" required></div>
+      </div>
+      <div class="contact-form-row">
+        <div class="field"><label>Phone Number *</label><input type="tel" name="phone" required></div>
+        <div class="field"><label>Email *</label><input type="email" name="email" required></div>
+      </div>
+      <div class="field"><label>Message *</label><textarea name="message" rows="4" required></textarea></div>
+      <button class="contact-submit" type="submit">Submit</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="logo-badge" style="width:56px; height:56px;">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <text x="50" y="68" font-family="Cormorant Garamond, serif" font-size="56" text-anchor="middle" fill="#FFFFFF">JG</text>
+      </svg>
+    </div>
+    <div style="font-family:'Jost',sans-serif; font-size:1.8rem; font-weight:600; letter-spacing:.02em; color:var(--white);">GREER REAL ESTATE</div>
+    <div class="footer-social">
+      <a href="mailto:joshgiampietro@gmail.com">&#9993;</a>
+      <a href="tel:5086806841">&#9742;</a>
+      <a href="#social-unconfirmed">f</a>
+      <a href="#social-unconfirmed">&#120143;</a>
+      <a href="#social-unconfirmed">&#9678;</a>
+      <a href="#social-unconfirmed">in</a>
+    </div>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>Location</h4>
+      <p>3264 Main St, Barnstable, MA 02630</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Phone: (508) 680-6841<br>Email: joshgiampietro@gmail.com</p>
+    </div>
+  </div>
+
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="meet-josh.html">Meet Josh</a>
+    <a href="listings.html">Listings</a>
+    <a href="sold.html">Sold</a>
+    <a href="communities.html">Communities</a>
+    <a href="buyers.html">Buyers</a>
+    <a href="sellers.html">Sellers</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="compliance">
+    Josh Giampietro is a real estate agent affiliated with Greer Real Estate, LLC. Greer Real Estate, LLC is a licensed real estate broker and abides by equal housing opportunity laws. All materials presented herein are intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. No statement is made as to the accuracy of any description. All measurements and square footage are approximate. This is not intended to solicit property already listed. Nothing herein shall be construed as legal, accounting, or other professional advice outside the realm of real estate brokerage.
+    <div style="margin-top:14px; font-size:16px; letter-spacing:.06em; color:var(--gray);">&#8962; &nbsp; &#9632; REALTOR &nbsp; MLS</div>
+  </div>
+
+  <div class="mls-disclosure">
+    <strong>Cape Cod &amp; Islands Multiple Listing Service (CCIMLS) / Cape Cod &amp; Islands Association of REALTORS&reg; (CCIAOR)</strong><br>
+    <div class="flag-note">PLACEHOLDER &mdash; the exact regional MLS/board disclosure boilerplate for CCIMLS/CCIAOR (Josh's listings also appear to be fed through MLS PIN) could not be confirmed from public sources reviewed. Insert the official disclosure language from the applicable entity here before this site goes live.</div>
+    <div class="flag-note">PLACEHOLDER — this mockup is a static recreation for pitch review. It is not a live site: this contact form is visual only and does not submit or send data anywhere.</div>
+  </div>
+
+  <div class="copyright">Mockup for internal pitch review — not a live site.</div>
+</footer>
+
+
+<script>
+function sendMailto(form){
+  var data = new FormData(form);
+  var name = data.get('name') || (((data.get('firstName')||'') + ' ' + (data.get('lastName')||'')).trim());
+  var phone = data.get('phone') || '';
+  var email = data.get('email') || '';
+  var message = data.get('message') || '';
+  var subject = encodeURIComponent('Website Inquiry from ' + (name || 'Website Visitor'));
+  var bodyLines = ['Name: ' + name, 'Phone: ' + phone, 'Email: ' + email, '', 'Message:', message];
+  var body = encodeURIComponent(bodyLines.join('\n'));
+  window.location.href = 'mailto:joshgiampietro@gmail.com?subject=' + subject + '&body=' + body;
+  return false;
+}
+</script>
+</body>
+</html>
